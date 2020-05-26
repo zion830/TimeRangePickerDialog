@@ -93,7 +93,7 @@ class TimeRangePickerDialog : DialogFragment() {
 
     private fun isOkBtnUsable(startHour: Int, endHour: Int, startMin: Int, endMin: Int): Boolean {
         if (!oneDayMode) {
-            return false
+            return true
         }
 
         return DateTimeUtil.isCorrectSequence(startHour, endHour, startMin, endMin)
