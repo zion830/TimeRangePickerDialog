@@ -1,0 +1,3 @@
+rootProject.name='RangeTimePickerDialog'
+include ':app'
+include ':range_picker_dialog'
