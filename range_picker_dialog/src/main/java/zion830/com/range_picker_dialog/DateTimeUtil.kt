@@ -4,9 +4,6 @@ import androidx.annotation.IntRange
 import java.text.SimpleDateFormat
 import java.util.*
 
-/*
- * Created by yunji on 14/04/2020
- */
 object DateTimeUtil {
     const val MINUTE_FORMAT = "%02d"
 
