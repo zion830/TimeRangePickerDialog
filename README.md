@@ -15,7 +15,7 @@ allprojects {
     }
 }
 ```
-2. Add the dependency. The latest version is `1.1`
+2. Add the dependency. The latest version is `1.2`
 ```
 dependencies {
     implementation "com.github.zion830:RangeTimePickerDialog:$version_code"
@@ -26,8 +26,6 @@ dependencies {
 ```
 TimeRangePickerDialog.Builder()
     .setTimeRange(10, 20, 16, 40)
-    .setTimeInterval(20)
-    .setOnDayMode(false)
     .setOnTimeRangeSelectedListener { /* Use selected time range */ }
     .build()
     .show(supportFragmentManager)
