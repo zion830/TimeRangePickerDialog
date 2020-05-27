@@ -163,7 +163,7 @@ class TimeRangePickerDialog : DialogFragment() {
         override fun build() = TimeRangePickerDialog().apply {
             onTimeRangeSelectedListener = listener
             interval = defaultTimeInterval
-            defaultOnDayMode = oneDayMode
+            oneDayMode = defaultOnDayMode
             timeRange = defaultTimeRange
         }
     }

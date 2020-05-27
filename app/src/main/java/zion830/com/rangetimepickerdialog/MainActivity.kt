@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         TimeRangePickerDialog.Builder()
             .setTimeRange(10, 20, 16, 40)
             .setTimeInterval(20)
+            .setOnDayMode(false)
             .setOnTimeRangeSelectedListener { tv_selected_range.text = it.readableTimeRange }
             .build()
             .show(supportFragmentManager)
