@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <zion830.com.range_picker_dialog.RangeTimePicker
+                    <zion830.com.range_picker_dialog.TimeRangePicker
                         android:id="@+id/tp_start"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <zion830.com.range_picker_dialog.RangeTimePicker
+                    <zion830.com.range_picker_dialog.TimeRangePicker
                         android:id="@+id/tp_end"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
