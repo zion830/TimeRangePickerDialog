@@ -15,7 +15,7 @@ allprojects {
     }
 }
 ```
-2. Add the dependency. The latest version is `1.0`
+2. Add the dependency. The latest version is `1.1`
 ```
 dependencies {
     implementation "com.github.zion830:RangeTimePickerDialog:$version_code"
@@ -24,18 +24,26 @@ dependencies {
 ## Usage
 - Show TimeRangePickerDialog
 ```
-TimeRangePickerDialog.newInstance(object : OnTimeRangeSelectedListener {
-    override fun onTimeSelected(startHour: Int, startMin: Int, endHour: Int, endMin: Int) {
-        // Use selected time range
-    }
-}).show(supportFragmentManager
-```
-- Convert onTimeSelected values to readable string (Ex. AM 10:30 - PM 1:00)
-```
-val dateString = DateTimeUtil.getReadableTimeString(startHour, endHour, startMin, endMin)
+TimeRangePickerDialog.Builder()
+    .setTimeRange(10, 20, 16, 40)
+    .setTimeInterval(20)
+    .setOnDayMode(false)
+    .setOnTimeRangeSelectedListener { /* Use selected time range */ }
+    .build()
+    .show(supportFragmentManager)
 ```
 ## Options
-- `oneDayMode` : If oneDayMode is true, the `OK` button is disabled if the end time is earlier than the start time. The default value is true.
+#### TimeRangePickerDialog
+| name| description|
+|---|---|
+| `oneDayMode`| `OK` button is disabled if `end time` is earlier than `start time`. Default value is true.|
+| `timeInterval`| Minute time interval. Default value is 10.|
+
+#### TimeRange
+| name| description|
+|---|---|
+| `readableTimeRange`| Time string like `AM 10:30 - PM 1:00`|
+| `isCorrectSequence`| Return whether `start time` is earlier than `end time`.|
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
