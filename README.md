@@ -1,4 +1,4 @@
-# RangeTimePickerDialog
+# TimeRangePickerDialog
 
 [![](https://jitpack.io/v/zion830/RangeTimePickerDialog.svg)](https://jitpack.io/#zion830/RangeTimePickerDialog)
 
@@ -26,7 +26,7 @@ dependencies {
 ```
 TimeRangePickerDialog.Builder()
     .setTimeRange(10, 20, 16, 40)
-    .setOnTimeRangeSelectedListener { /* Use selected time range */ }
+    .setOnTimeRangeSelectedListener { timeRange -> /* Use selected time range */ }
     .build()
     .show(supportFragmentManager)
 ```
@@ -34,13 +34,18 @@ TimeRangePickerDialog.Builder()
 #### TimeRangePickerDialog
 | name| description|
 |---|---|
+|`timeRange`|First selected time. Default range is `${current hour}:00 ~ ${current hour + 1}:00`|
 | `oneDayMode`| `OK` button is disabled if `end time` is earlier than `start time`. Default value is true.|
 | `timeInterval`| Minute time interval. Default value is 10.|
 
 #### TimeRange
 | name| description|
 |---|---|
-| `readableTimeRange`| Time string like `AM 10:30 - PM 1:00`|
+|`startHour`|Selected start hour.|
+|`startMinute`|Selected start minute.|
+|`endHour`|Selected end hour.|
+|`endMinute`|Selected end minute.|
+| `readableTimeRange`| Return Time string like `AM 10:30 - PM 1:00`.|
 | `isCorrectSequence`| Return whether `start time` is earlier than `end time`.|
 
 ## License
