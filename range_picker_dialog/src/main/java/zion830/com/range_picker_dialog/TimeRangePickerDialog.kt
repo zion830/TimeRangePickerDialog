@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager
 import zion830.com.range_picker_dialog.databinding.TimeRangePickerDialogBinding
 
 class TimeRangePickerDialog : DialogFragment() {
-    // If oneDayMode is true, the OK button is disabled if the end time is earlier than the start time.
+    // OK button is disabled if end time is earlier than start time.
     var oneDayMode = true
     var onTimeRangeSelectedListener: OnTimeRangeSelectedListener? = null
 
@@ -51,12 +51,13 @@ class TimeRangePickerDialog : DialogFragment() {
                 )
             }
             btnOk.setOnClickListener {
-                onTimeRangeSelectedListener?.onTimeSelected(
+                val selectedTimeRange = TimeRange(
                     tpStart.hour,
                     tpStart.getDisplayedMinutes(),
                     tpEnd.hour,
                     tpEnd.getDisplayedMinutes()
                 )
+                onTimeRangeSelectedListener?.onTimeSelected(selectedTimeRange)
                 dismiss()
             }
             btnCancel.setOnClickListener { dismiss() }
@@ -102,7 +103,7 @@ class TimeRangePickerDialog : DialogFragment() {
     companion object {
         private val TAG = TimeRangePickerDialog::class.java.name
 
-        fun newInstance(
+        fun create(
             timeRangeSelectedListener: OnTimeRangeSelectedListener? = null
         ): TimeRangePickerDialog = TimeRangePickerDialog().apply {
             onTimeRangeSelectedListener = timeRangeSelectedListener
