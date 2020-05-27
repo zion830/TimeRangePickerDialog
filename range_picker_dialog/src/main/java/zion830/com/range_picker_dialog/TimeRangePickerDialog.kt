@@ -15,13 +15,13 @@ class TimeRangePickerDialog : DialogFragment() {
     // Listener called when time is selected
     var onTimeRangeSelectedListener: OnTimeRangeSelectedListener? = null
 
-    // OK button is disabled if end time is earlier than start time.
+    // OK button is disabled if end time is earlier than start time
     var oneDayMode = true
 
-    // Minute time interval. default value is 10.
+    // Minute time interval. default value is 10
     var interval = TimeRangePicker.defaultInterval
 
-    // Set time range. default range is [current time ~ current time + 1 hour]
+    // default range is [current time ~ current time + 1 hour]
     var timeRange = TimePickerUtils.getCurrentTimeRange()
 
     private lateinit var binding: TimeRangePickerDialogBinding
@@ -70,9 +70,9 @@ class TimeRangePickerDialog : DialogFragment() {
     private fun setTimeRange() {
         with(binding) {
             tpStart.hour = timeRange.startHour
-            tpStart.minute = timeRange.startMinute
+            tpStart.minute = timeRange.startMinute / interval
             tpEnd.hour = timeRange.endHour
-            tpEnd.minute = timeRange.endMinute
+            tpEnd.minute = timeRange.endMinute / interval
         }
     }
 
@@ -145,42 +145,26 @@ class TimeRangePickerDialog : DialogFragment() {
             return this
         }
 
+        fun setTimeRange(
+            @IntRange(from = 1, to = 23) startHour: Int,
+            @IntRange(from = 0, to = 59) startMinute: Int,
+            @IntRange(from = 1, to = 23) endHour: Int,
+            @IntRange(from = 0, to = 59) endMinute: Int
+        ): Builder {
+            defaultTimeRange = TimeRange(startHour, startMinute, endHour, endMinute)
+            return this
+        }
+
         fun setTimeRange(timeRange: TimeRange): Builder {
             defaultTimeRange = timeRange
             return this
         }
 
-        fun setStartTime(
-            @IntRange(from = 1, to = 23) startHour: Int,
-            @IntRange(from = 0, to = 59) startMinute: Int
-        ): Builder {
-            defaultTimeRange = TimeRange(
-                startHour,
-                startMinute,
-                defaultTimeRange.endHour,
-                defaultTimeRange.endMinute
-            )
-            return this
-        }
-
-        fun setEndTime(
-            @IntRange(from = 1, to = 23) endHour: Int,
-            @IntRange(from = 0, to = 59) endMinute: Int
-        ): Builder {
-            defaultTimeRange = TimeRange(
-                defaultTimeRange.startHour,
-                defaultTimeRange.startMinute,
-                endHour,
-                endMinute
-            )
-            return this
-        }
-
         override fun build() = TimeRangePickerDialog().apply {
-            setTimeRange(defaultTimeRange)
+            onTimeRangeSelectedListener = listener
             interval = defaultTimeInterval
             defaultOnDayMode = oneDayMode
-            onTimeRangeSelectedListener = listener
+            timeRange = defaultTimeRange
         }
     }
 
