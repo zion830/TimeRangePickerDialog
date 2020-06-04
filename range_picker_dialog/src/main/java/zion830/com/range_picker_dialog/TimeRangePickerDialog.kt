@@ -47,12 +47,8 @@ class TimeRangePickerDialog : DialogFragment() {
             tpStart.timeInterval = interval
             tpEnd.timeInterval = interval
             btnOk.setUsable(isOkBtnUsable())
-            tpStart.setOnTimeChangedListener { _, _, _ ->
-                btnOk.setUsable(isOkBtnUsable())
-            }
-            tpEnd.setOnTimeChangedListener { _, _, _ ->
-                btnOk.setUsable(isOkBtnUsable())
-            }
+            tpStart.setOnTimeChangedListener { _, _, _ -> btnOk.setUsable(isOkBtnUsable()) }
+            tpEnd.setOnTimeChangedListener { _, _, _ -> btnOk.setUsable(isOkBtnUsable()) }
             btnOk.setOnClickListener {
                 val selectedTimeRange = TimeRange(
                     tpStart.hour,

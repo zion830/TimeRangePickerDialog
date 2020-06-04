@@ -13,6 +13,6 @@ data class TimeRange(
         TimePickerUtils.getReadableTimeString(startHour, startMinute, endHour, endMinute)
 
     // Return whether the start time is earlier than the end time
-    val isCorrectSequence =
+    fun isCorrectSequence() =
         TimePickerUtils.isCorrectSequence(startHour, startMinute, endHour, endMinute)
 }
