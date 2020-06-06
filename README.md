@@ -7,7 +7,7 @@ Custom dialog for selecting the time range on Android.
 
 ## How To Start
 1. Add it in your root build.gradle at the end of repositories:
-```
+```gradle
 allprojects {
     repositories {
         ...
@@ -16,14 +16,14 @@ allprojects {
 }
 ```
 2. Add the dependency. The latest version is `1.2`
-```
+```gradle
 dependencies {
     implementation "com.github.zion830:RangeTimePickerDialog:$version_code"
 }
 ```
 ## Usage
 - Show TimeRangePickerDialog
-```
+```kotlin
 TimeRangePickerDialog.Builder()
     .setTimeRange(10, 20, 16, 40)
     .setOnTimeRangeSelectedListener { timeRange -> /* Use selected time range */ }
