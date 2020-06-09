@@ -10,7 +10,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import zion830.com.range_picker_dialog.databinding.TimeRangePickerDialogBinding
 
-
+/**
+ * TimeRangePicker based on DialogFragment.
+ */
 class TimeRangePickerDialog : DialogFragment() {
     // Listener called when time is selected
     var onTimeRangeSelectedListener: OnTimeRangeSelectedListener? = null
@@ -21,7 +23,7 @@ class TimeRangePickerDialog : DialogFragment() {
     // Minute time interval. default value is 10
     var interval = TimeRangePicker.defaultInterval
 
-    // default range is [current time ~ current time + 1 hour]
+    // default range is {current hour}:00 ~ {current hour + 1}:00
     var timeRange = TimePickerUtils.getCurrentTimeRange()
 
     private lateinit var binding: TimeRangePickerDialogBinding
@@ -50,13 +52,7 @@ class TimeRangePickerDialog : DialogFragment() {
             tpStart.setOnTimeChangedListener { _, _, _ -> btnOk.setUsable(isOkBtnUsable()) }
             tpEnd.setOnTimeChangedListener { _, _, _ -> btnOk.setUsable(isOkBtnUsable()) }
             btnOk.setOnClickListener {
-                val selectedTimeRange = TimeRange(
-                    tpStart.hour,
-                    tpStart.getDisplayedMinutes(),
-                    tpEnd.hour,
-                    tpEnd.getDisplayedMinutes()
-                )
-                onTimeRangeSelectedListener?.onTimeSelected(selectedTimeRange)
+                onTimeRangeSelectedListener?.onTimeSelected(getSelectedTimeRange())
                 dismiss()
             }
             btnCancel.setOnClickListener { dismiss() }
@@ -65,11 +61,20 @@ class TimeRangePickerDialog : DialogFragment() {
 
     private fun setTimeRange() {
         with(binding) {
-            tpStart.hour = timeRange.startHour
-            tpStart.minute = timeRange.startMinute / interval
-            tpEnd.hour = timeRange.endHour
-            tpEnd.minute = timeRange.endMinute / interval
+            tpStart.setDisplayedHour(timeRange.startHour)
+            tpStart.setDisplayedMinute(timeRange.startMinute / interval)
+            tpEnd.setDisplayedHour(timeRange.endHour)
+            tpEnd.setDisplayedMinute(timeRange.endMinute / interval)
         }
+    }
+
+    private fun getSelectedTimeRange() = with(binding) {
+        TimeRange(
+            tpStart.getDisplayedHour(),
+            tpStart.getDisplayedMinute(),
+            tpEnd.getDisplayedHour(),
+            tpEnd.getDisplayedMinute()
+        )
     }
 
     private fun setUpTab() {
@@ -101,14 +106,7 @@ class TimeRangePickerDialog : DialogFragment() {
             return true
         }
 
-        return with(binding) {
-            TimePickerUtils.isCorrectSequence(
-                tpStart.hour,
-                tpStart.getDisplayedMinutes(),
-                tpEnd.hour,
-                tpEnd.getDisplayedMinutes()
-            )
-        }
+        return TimePickerUtils.isCorrectSequence(getSelectedTimeRange())
     }
 
     class Builder : Buildable<TimeRangePickerDialog> {

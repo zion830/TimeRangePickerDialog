@@ -29,6 +29,10 @@ internal object TimePickerUtils {
         getAmPm(endHour), getHourForAmPm(endHour), endMin
     )
 
+    fun isCorrectSequence(timeRange: TimeRange): Boolean = with(timeRange) {
+        isCorrectSequence(startHour, startMinute, endHour, startHour)
+    }
+
     fun isCorrectSequence(
         @IntRange(from = 1, to = 23) startHour: Int,
         @IntRange(from = 0, to = 59) startMin: Int,

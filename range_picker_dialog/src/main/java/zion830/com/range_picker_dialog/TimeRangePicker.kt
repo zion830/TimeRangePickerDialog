@@ -33,11 +33,7 @@ internal class TimeRangePicker @JvmOverloads constructor(
 
     init {
         setInterval(timeInterval)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            minute = 0 // setMinute() requires sdk level 23
-        } else {
-            currentMinute = 0
-        }
+        setDisplayedMinute(0)
     }
 
     @SuppressLint("PrivateApi")
@@ -55,8 +51,28 @@ internal class TimeRangePicker @JvmOverloads constructor(
         }
     }
 
-    fun getDisplayedMinutes(): Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        minute * timeInterval // getMinute() requires sdk level 23
+    fun setDisplayedHour(@IntRange(from = 0, to = 23) hour: Int) =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.hour = MathUtils.clamp(hour, 0, 23)
+        } else {
+            this.currentHour = MathUtils.clamp(hour, 0, 23)
+        }
+
+    fun setDisplayedMinute(@IntRange(from = 0, to = 59) minute: Int) =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.minute = minute
+        } else {
+            this.currentMinute = minute
+        }
+
+    fun getDisplayedHour() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        hour
+    } else {
+        currentHour
+    }
+
+    fun getDisplayedMinute(): Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        minute * timeInterval
     } else {
         currentMinute * timeInterval
     }
