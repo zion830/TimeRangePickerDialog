@@ -94,7 +94,6 @@ class TimeRangePickerDialog : DialogFragment() {
             setContent(R.id.tab_end_time)
             setIndicator(endTimeTitle)
         }
-
         tabHost.apply {
             addTab(startTimeTab)
             addTab(endTimeTab)
