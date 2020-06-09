@@ -2,6 +2,7 @@ package zion830.com.range_picker_dialog
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.NumberPicker
@@ -32,7 +33,11 @@ internal class TimeRangePicker @JvmOverloads constructor(
 
     init {
         setInterval(timeInterval)
-        minute = 0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            minute = 0 // setMinute() requires sdk level 23
+        } else {
+            currentMinute = 0
+        }
     }
 
     @SuppressLint("PrivateApi")
@@ -50,7 +55,11 @@ internal class TimeRangePicker @JvmOverloads constructor(
         }
     }
 
-    fun getDisplayedMinutes(): Int = minute * timeInterval
+    fun getDisplayedMinutes(): Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        minute * timeInterval // getMinute() requires sdk level 23
+    } else {
+        currentMinute * timeInterval
+    }
 
     private fun getDisplayedValue(interval: Int = timeInterval): Array<String> {
         val minutesArray = ArrayList<String>()
