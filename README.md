@@ -1,7 +1,7 @@
 # TimeRangePickerDialog
 
-[![](https://jitpack.io/v/zion830/RangeTimePickerDialog.svg)](https://jitpack.io/#zion830/RangeTimePickerDialog)
-
+[![label1](https://jitpack.io/v/zion830/RangeTimePickerDialog.svg)](https://jitpack.io/#zion830/RangeTimePickerDialog)
+![label2](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)
 
 Custom dialog for selecting the time range on Android.
 
