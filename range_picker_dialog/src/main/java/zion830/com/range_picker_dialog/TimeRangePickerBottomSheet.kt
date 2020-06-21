@@ -37,6 +37,29 @@ class TimeRangePickerBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    class Builder : Buildable<TimeRangePickerBottomSheet>, TimeRangeSelectable<Builder> {
+
+        override fun setOnDayMode(OnDayMode: Boolean): Builder {
+            TODO("Not yet implemented")
+        }
+
+        override fun setTimeInterval(timeInterval: Int): Builder {
+            TODO("Not yet implemented")
+        }
+
+        override fun setOnTimeRangeSelectedListener(timeRangeSelectedListener: OnTimeRangeSelectedListener): Builder {
+            TODO("Not yet implemented")
+        }
+
+        override fun setTimeRange(timeRange: TimeRange): Builder {
+            TODO("Not yet implemented")
+        }
+
+        override fun build(): TimeRangePickerBottomSheet {
+            TODO("Not yet implemented")
+        }
+    }
+
     companion object {
         private val TAG = TimeRangePickerBottomSheet::class.java.name
 

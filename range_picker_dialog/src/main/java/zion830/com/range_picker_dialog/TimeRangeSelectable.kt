@@ -1,6 +1,6 @@
 package zion830.com.range_picker_dialog
 
-interface TimeRangeSelectable<T> {
+interface TimeRangeSelectable<T : Buildable<*>> {
 
     fun setOnDayMode(OnDayMode: Boolean): T
 

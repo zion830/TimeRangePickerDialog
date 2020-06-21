@@ -108,23 +108,23 @@ class TimeRangePickerDialog : DialogFragment() {
         return TimePickerUtils.isCorrectSequence(getSelectedTimeRange())
     }
 
-    class Builder : Buildable<TimeRangePickerDialog> {
+    class Builder : Buildable<TimeRangePickerDialog>, TimeRangeSelectable<Builder> {
         private var listener: OnTimeRangeSelectedListener? = null
         private var defaultTimeInterval = TimeRangePicker.defaultInterval
         private var defaultTimeRange = TimePickerUtils.getCurrentTimeRange()
         private var defaultOnDayMode = true
 
-        fun setOnDayMode(OnDayMode: Boolean): Builder {
+        override fun setOnDayMode(OnDayMode: Boolean): Builder {
             defaultOnDayMode = OnDayMode
             return this
         }
 
-        fun setTimeInterval(timeInterval: Int): Builder {
+        override fun setTimeInterval(timeInterval: Int): Builder {
             defaultTimeInterval = timeInterval
             return this
         }
 
-        fun setOnTimeRangeSelectedListener(timeRangeSelectedListener: OnTimeRangeSelectedListener): Builder {
+        override fun setOnTimeRangeSelectedListener(timeRangeSelectedListener: OnTimeRangeSelectedListener): Builder {
             listener = timeRangeSelectedListener
             return this
         }
@@ -148,7 +148,7 @@ class TimeRangePickerDialog : DialogFragment() {
             return this
         }
 
-        fun setTimeRange(timeRange: TimeRange): Builder {
+        override fun setTimeRange(timeRange: TimeRange): Builder {
             defaultTimeRange = timeRange
             return this
         }
