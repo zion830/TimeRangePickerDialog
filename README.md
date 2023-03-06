@@ -15,7 +15,7 @@ allprojects {
     }
 }
 ```
-2. Add the dependency. The latest version is `1.2`
+2. Add the dependency. The latest version is `1.3`
 ```gradle
 dependencies {
     implementation "com.github.zion830:RangeTimePickerDialog:$version_code"
